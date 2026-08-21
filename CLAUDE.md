@@ -33,7 +33,7 @@ Note `build` does more than compile: it type-checks via `astro check`, runs Page
 
 Blog posts are Markdown in `src/data/blog/`, loaded by the `blog` collection in `src/content.config.ts` with glob `**/[^_]*.md`.
 
-- **Underscore prefix = excluded.** `_releases/` and any `_*.md` are skipped by the loader, and `getPath` (`src/utils/getPath.ts`) also strips `_`-prefixed directories from URLs.
+- **Underscore prefix excludes files, not directories.** The glob `**/[^_]*.md` only skips files whose *basename* starts with `_`. A `_`-prefixed directory is still loaded and published — `getPath` (`src/utils/getPath.ts`) merely strips that segment from the URL, so `_drafts/foo.md` ships at `/posts/foo`. To keep a post out of the build, use `draft: true` or an `_` on the filename.
 - **Directories become URL segments.** `src/data/blog/foo/bar.md` → `/posts/foo/bar`, with each segment slugified. Routing is `src/pages/posts/[...slug]/index.astro`, which builds `params.slug` from `getPath`.
 - **Frontmatter schema** (enforced by Zod, build fails on mismatch): required `title`, `description`, `pubDatetime`; optional `author` (defaults to `SITE.author`), `modDatetime`, `featured`, `draft`, `tags` (defaults `["others"]`), `ogImage`, `canonicalURL`, `hideEditPost`, `timezone`.
 - **Draft/scheduled behavior** lives in `src/utils/postFilter.ts`: `draft: true` posts are always hidden from listings; posts with a future `pubDatetime` are hidden in production but visible in dev. `SITE.scheduledPostMargin` (15 min) is the grace window.
