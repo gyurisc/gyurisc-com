@@ -10,7 +10,9 @@ Deployed on Vercel (`vercel.json`, `framework: astro`).
 
 ## Commands
 
-pnpm is the package manager — `pnpm-lock.yaml` is the only lockfile; do not run `npm install` here. CI pins pnpm 10.11.1 / Node 20.
+pnpm is the package manager — `pnpm-lock.yaml` is the only lockfile; do not run `npm install` here. The version is pinned by the `packageManager` field in `package.json` (pnpm 11.22.0), which CI, Vercel, and corepack all read. pnpm 11 requires Node >= 22.13.
+
+`pnpm-workspace.yaml` exists solely to hold `allowBuilds` (esbuild, sharp). pnpm 11 blocks dependency build scripts by default, and `sharp` needs its install script for Astro's image pipeline — without this file the build fails. Note that pnpm 11 no longer reads the `pnpm` field in `package.json`, and `allowBuilds` replaced the older `onlyBuiltDependencies` key.
 
 ```bash
 pnpm install
