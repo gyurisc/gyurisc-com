@@ -6,11 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Krisztian Gyuris's personal blog (https://gyurisc.com), built on the **AstroPaper** Astro theme. `README.md` is the upstream theme's README (authored by Sat Naing) — it documents the theme, not this site. Treat it as theme reference, not as a description of Krisztian's blog.
 
-Deployed on Vercel (`vercel.json`, `framework: astro`).
+Deployed on Vercel — see [Deployment](#deployment) for the project, the required corepack env var, and the domain layout.
 
 ## Commands
 
-pnpm is the package manager — `pnpm-lock.yaml` is the only lockfile; do not run `npm install` here. The version is pinned by the `packageManager` field in `package.json` (pnpm 11.22.0), which CI, Vercel, and corepack all read. pnpm 11 requires Node >= 22.13.
+pnpm is the package manager — `pnpm-lock.yaml` is the only lockfile; do not run `npm install` here. The version is pinned by the `packageManager` field in `package.json` (pnpm 11.22.0). CI reads it via `pnpm/action-setup@v4`; Vercel reads it **only because `ENABLE_EXPERIMENTAL_COREPACK=1` is set on the project** — see [Deployment](#deployment). pnpm 11 requires Node >= 22.13.
 
 `pnpm-workspace.yaml` exists solely to hold `allowBuilds` (esbuild, sharp). pnpm 11 blocks dependency build scripts by default, and `sharp` needs its install script for Astro's image pipeline — without this file the build fails. Note that pnpm 11 no longer reads the `pnpm` field in `package.json`, and `allowBuilds` replaced the older `onlyBuiltDependencies` key.
 
@@ -28,6 +28,26 @@ pnpm run format:check  # prettier --check . (CI gate)
 There is no test suite. CI (`.github/workflows/ci.yml`) runs exactly `lint` → `format:check` → `build`; run those three before pushing.
 
 Note `build` does more than compile: it type-checks via `astro check`, runs Pagefind over `dist`, then copies `dist/pagefind` into `public/`. Search only reflects content as of the last build.
+
+## Deployment
+
+Vercel project `gyurisc-com` under team `gyurisc-s-team`; Framework Preset is Astro, and `vercel.json` declares `framework: astro` as well. Pushes to `main` deploy to production.
+
+**`ENABLE_EXPERIMENTAL_COREPACK=1` is set on the Vercel project — do not remove it.** Vercel ignores the `packageManager` field unless corepack is enabled. Without it, Vercel infers the pnpm version from the lockfile plus the project's 2023 creation date and picks **pnpm 9**, which then rejects `pnpm-workspace.yaml`: that file holds only the pnpm 11 `allowBuilds` key, and pnpm 9 requires every workspace file to carry a non-empty `packages:` field.
+
+```
+Using pnpm@9.x based on project creation date
+ ERROR  packages field missing or empty
+Error: Command "pnpm install" exited with 1
+```
+
+A healthy build instead logs `Detected ENABLE_EXPERIMENTAL_COREPACK=1 and "pnpm@11.22.0" in package.json`, runs sharp's install script, and ends with `Done in ...s using pnpm v11.22.0`.
+
+This failure is invisible locally and in CI — both already run pnpm 11, so Vercel is the only environment that drops to 9. Adding `packages:` to `pnpm-workspace.yaml` would silence the error but leave Vercel on pnpm 9 while everything else runs 11 (and `allowBuilds` would be a no-op there); prefer keeping the versions identical. If corepack support ever breaks, override the project's Install Command to `corepack enable && pnpm install --frozen-lockfile` rather than editing the workspace file.
+
+**Domains.** `gyurisc.com` is canonical and serves the site; `www.gyurisc.com` is a 308 redirect to it. Keep `SITE.website` (`src/config.ts`) pointed at whichever host returns 200 — canonical tags, sitemap, RSS and OG URLs all derive from it, so a mismatch aims every canonical at a redirect.
+
+Vercel is also the DNS provider (`ns1`/`ns2.vercel-dns.com`), so records are edited with `vercel dns ls|add|rm`, not at the registrar. The zone carries ProtonMail MX/SPF/DKIM/DMARC records — never remove those when editing DNS. If a domain sits at `pending_domain_verification` despite correct DNS, check for more than one `vc-domain-verify=` TXT under `_vercel.gyurisc.com`: a leftover record from a previously linked service blocks the claim, and only the API surfaces the real reason (`txt_on_another_project`) — the dashboard just shows a generic pending state.
 
 ## Content model
 
