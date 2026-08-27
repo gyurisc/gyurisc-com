@@ -4,7 +4,7 @@ export const SITE = {
   profile: "https://gyurisc.com/",
   desc: "Notes on building things, breaking things, and figuring stuff out.",
   title: "Krisztian Gyuris",
-  ogImage: "astropaper-og.jpg",
+  ogImage: "", // empty -> use the generated /og.png (see src/pages/og.png.ts)
   lightAndDarkMode: true,
   postPerIndex: 4,
   postPerPage: 4,
