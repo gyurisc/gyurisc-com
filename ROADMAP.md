@@ -36,3 +36,8 @@ section; delete items once they're done rather than marking them complete.
       `corepack pnpm` resolves 11.22.0 correctly. Note CLAUDE.md currently
       states local and CI both run pnpm 11; that's true of CI, not of this
       machine.
+
+- [x] **Line endings normalized.** `.gitattributes` now pins `* text=auto
+      eol=lf`, so Windows checkouts stop producing CRLF files that
+      `format:check` rejects locally while CI (Linux) passes. Delete this entry
+      once it's been through a fresh clone without complaint.

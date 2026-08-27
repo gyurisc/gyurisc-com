@@ -1,0 +1,5 @@
+# Normalize line endings to LF in the repository and on checkout, on every
+# platform. Prettier is configured with endOfLine: "lf" (.prettierrc.mjs), so
+# without this a Windows checkout (core.autocrlf=true) produces CRLF files that
+# `pnpm run format:check` rejects locally while CI, running on Linux, passes.
+* text=auto eol=lf
