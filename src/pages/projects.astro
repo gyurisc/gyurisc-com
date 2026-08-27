@@ -1,0 +1,50 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { PROJECTS } from "@/data/projects";
+import { SITE } from "@/config";
+---
+
+<Layout
+  title={`Projects | ${SITE.title}`}
+  description="Things I've built: small products, calculators and tools."
+>
+  <Header />
+  <Breadcrumb />
+  <main id="main-content" class="app-layout">
+    <section id="projects" class="mb-28 max-w-app">
+      <h1 class="text-2xl tracking-wider sm:text-3xl">Projects</h1>
+      <p class="mt-2 mb-6">
+        Things I've built. Mostly small, mostly shipped on evenings and
+        weekends.
+      </p>
+      <ul>
+        {
+          PROJECTS.map(({ name, description, href, label }) => (
+            <li class="my-6">
+              <a
+                href={href}
+                class:list={[
+                  "inline-block text-lg font-medium text-accent",
+                  "decoration-dashed underline-offset-4 hover:underline",
+                  "focus-visible:no-underline focus-visible:underline-offset-0",
+                ]}
+              >
+                <h2>{name}</h2>
+              </a>
+              {label && (
+                <span class="ms-2 rounded border border-border px-2 py-0.5 align-middle text-xs opacity-80">
+                  {label}
+                </span>
+              )}
+              <p>{description}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</Layout>
