@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-Krisztian Gyuris's personal blog (https://gyurisc.com), built on the **AstroPaper** Astro theme. `README.md` is the upstream theme's README (authored by Sat Naing) — it documents the theme, not this site. Treat it as theme reference, not as a description of Krisztian's blog.
+Krisztian Gyuris's personal blog (https://gyurisc.com), built on the **AstroPaper** Astro theme by Sat Naing. `README.md` documents this site — how to run it, write a post, and deploy it. The upstream theme's own docs live at [astro-paper](https://github.com/satnaing/astro-paper); `LICENSE` is the theme's MIT license and still applies.
 
 Deployed on Vercel — see [Deployment](#deployment) for the project, the required corepack env var, and the domain layout.
 
