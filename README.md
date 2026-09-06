@@ -1,180 +1,110 @@
-# AstroPaper 📄
+# gyurisc.com
 
-![AstroPaper](public/astropaper-og.jpg)
-[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/community/file/1356898632249991861)
-![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![GitHub](https://img.shields.io/github/license/satnaing/astro-paper?color=%232F3741&style=for-the-badge)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white&style=for-the-badge)](https://conventionalcommits.org)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge)](http://commitizen.github.io/cz-cli/)
+Source for my personal blog at **[gyurisc.com](https://gyurisc.com)** — notes on building things, breaking things, and figuring stuff out.
 
-AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro blog theme. This theme is designed and crafted based on [my personal blog](https://satnaing.dev/blog).
+Built with [Astro](https://astro.build) on top of the [AstroPaper](https://github.com/satnaing/astro-paper) theme by Sat Naing, and deployed on Vercel.
 
-Read [the blog posts](https://astro-paper.pages.dev/posts/) or check [the README Documentation Section](#-documentation) for more info.
+## Requirements
 
-## 🔥 Features
+- Node.js >= 22.13
+- [pnpm](https://pnpm.io) 11.22.0 — pinned via the `packageManager` field in `package.json`. Run `corepack enable` once and it will be used automatically.
 
-- [x] type-safe markdown
-- [x] super fast performance
-- [x] accessible (Keyboard/VoiceOver)
-- [x] responsive (mobile ~ desktops)
-- [x] SEO-friendly
-- [x] light & dark mode
-- [x] fuzzy search
-- [x] draft posts & pagination
-- [x] sitemap & rss feed
-- [x] followed best practices
-- [x] highly customizable
-- [x] dynamic OG image generation for blog posts [#15](https://github.com/satnaing/astro-paper/pull/15) ([Blog Post](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/))
+pnpm is the only supported package manager here; `pnpm-lock.yaml` is the only lockfile. Don't run `npm install`.
 
-_Note: I've tested screen-reader accessibility of AstroPaper using **VoiceOver** on Mac and **TalkBack** on Android. I couldn't test all other screen-readers out there. However, accessibility enhancements in AstroPaper should be working fine on others as well._
-
-## ✅ Lighthouse Score
-
-<p align="center">
-  <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fastro-paper.pages.dev%2F&form_factor=desktop">
-    <img width="710" alt="AstroPaper Lighthouse Score" src="AstroPaper-lighthouse-score.svg">
-  </a>
-</p>
-
-## 🚀 Project Structure
-
-Inside of AstroPaper, you'll see the following folders and files:
+## Getting started
 
 ```bash
-/
-├── public/
-│   ├── pagefind/ # auto-generated when build
-│   ├── favicon.svg
-│   └── astropaper-og.jpg
-├── src/
-│   ├── assets/
-│   │   ├── icons/
-│   │   └── images/
-│   ├── components/
-│   ├── data/
-│   │   └── blog/
-│   │       └── some-blog-posts.md
-│   ├── layouts/
-│   ├── pages/
-│   ├── scripts/
-│   ├── styles/
-│   ├── utils/
-│   ├── config.ts
-│   ├── constants.ts
-│   ├── content.config.ts
-│   ├── env.d.ts
-│   └── remark-collapse.d.ts
-└── astro.config.ts
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-All blog posts are stored in `src/data/blog` directory.
-
-## 📖 Documentation
-
-Documentation can be read in two formats\_ _markdown_ & _blog post_.
-
-- Configuration - [markdown](src/data/blog/how-to-configure-astropaper-theme.md) | [blog post](https://astro-paper.pages.dev/posts/how-to-configure-astropaper-theme/)
-- Add Posts - [markdown](src/data/blog/adding-new-post.md) | [blog post](https://astro-paper.pages.dev/posts/adding-new-posts-in-astropaper-theme/)
-- Customize Color Schemes - [markdown](src/data/blog/customizing-astropaper-theme-color-schemes.md) | [blog post](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/)
-- Predefined Color Schemes - [markdown](src/data/blog/predefined-color-schemes.md) | [blog post](https://astro-paper.pages.dev/posts/predefined-color-schemes/)
-
-## 💻 Tech Stack
-
-**Main Framework** - [Astro](https://astro.build/)  
-**Type Checking** - [TypeScript](https://www.typescriptlang.org/)  
-**Styling** - [TailwindCSS](https://tailwindcss.com/)  
-**UI/UX** - [Figma Design File](https://www.figma.com/community/file/1356898632249991861)  
-**Static Search** - [FuseJS](https://pagefind.app/)  
-**Icons** - [Tablers](https://tabler-icons.io/)  
-**Code Formatting** - [Prettier](https://prettier.io/)  
-**Deployment** - [Cloudflare Pages](https://pages.cloudflare.com/)  
-**Illustration in About Page** - [https://freesvgillustration.com](https://freesvgillustration.com/)  
-**Linting** - [ESLint](https://eslint.org)
-
-## 👨🏻‍💻 Running Locally
-
-You can start using this project locally by running the following command in your desired directory:
-
-```bash
-# pnpm
-pnpm create astro@latest --template satnaing/astro-paper
-
-# npm
-npm create astro@latest -- --template satnaing/astro-paper
-
-# yarn
-yarn create astro --template satnaing/astro-paper
-
-# bun
-bun create astro@latest -- --template satnaing/astro-paper
-```
-
-Then start the project by running the following commands:
-
-```bash
-# install dependencies if you haven't done so in the previous step.
 pnpm install
-
-# start running the project
-pnpm run dev
+pnpm run dev      # http://localhost:4321
 ```
 
-As an alternative approach, if you have Docker installed, you can use Docker to run this project locally. Here's how:
+## Commands
 
-```bash
-# Build the Docker image
-docker build -t astropaper .
+| Command                 | Does                                                                             |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| `pnpm install`          | Install dependencies                                                             |
+| `pnpm run dev`          | Dev server at `localhost:4321`                                                   |
+| `pnpm run build`        | Type-check, build to `dist/`, index with Pagefind, copy the index into `public/` |
+| `pnpm run preview`      | Serve the built `dist/` locally                                                  |
+| `pnpm run sync`         | Regenerate `.astro/` types after editing `src/content.config.ts`                 |
+| `pnpm run lint`         | ESLint                                                                           |
+| `pnpm run format`       | Prettier, writing changes                                                        |
+| `pnpm run format:check` | Prettier check (the CI gate)                                                     |
 
-# Run the Docker container
-docker run -p 4321:80 astropaper
-```
+There is no test suite. CI runs `lint` → `format:check` → `build`; run those three before pushing.
 
-## Google Site Verification (optional)
+Note that search is powered by [Pagefind](https://pagefind.app), whose index is generated during `pnpm run build` — search results only reflect content as of the last build.
 
-You can easily add your [Google Site Verification HTML tag](https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag) in AstroPaper using an environment variable. This step is optional. If you don't add the following environment variable, the google-site-verification tag won't appear in the HTML `<head>` section.
+## Writing a post
 
-```bash
-# in your environment variable file (.env)
-PUBLIC_GOOGLE_SITE_VERIFICATION=your-google-site-verification-value
-```
+Posts are Markdown files in `src/data/blog/`. Create a file and give it frontmatter:
 
-> See [this discussion](https://github.com/satnaing/astro-paper/discussions/334#discussioncomment-10139247) for adding AstroPaper to the Google Search Console.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-> **_Note!_** For `Docker` commands we must have it [installed](https://docs.docker.com/engine/install/) in your machine.
-
-| Command                              | Action                                                                                                                           |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| `pnpm install`                       | Installs dependencies                                                                                                            |
-| `pnpm run dev`                       | Starts local dev server at `localhost:4321`                                                                                      |
-| `pnpm run build`                     | Build your production site to `./dist/`                                                                                          |
-| `pnpm run preview`                   | Preview your build locally, before deploying                                                                                     |
-| `pnpm run format:check`              | Check code format with Prettier                                                                                                  |
-| `pnpm run format`                    | Format codes with Prettier                                                                                                       |
-| `pnpm run sync`                      | Generates TypeScript types for all Astro modules. [Learn more](https://docs.astro.build/en/reference/cli-reference/#astro-sync). |
-| `pnpm run lint`                      | Lint with ESLint                                                                                                                 |
-| `docker compose up -d`               | Run AstroPaper on docker, You can access with the same hostname and port informed on `dev` command.                              |
-| `docker compose run app npm install` | You can run any command above into the docker container.                                                                         |
-| `docker build -t astropaper .`       | Build Docker image for AstroPaper.                                                                                               |
-| `docker run -p 4321:80 astropaper`   | Run AstroPaper on Docker. The website will be accessible at `http://localhost:4321`.                                             |
-
-> **_Warning!_** Windows PowerShell users may need to install the [concurrently package](https://www.npmjs.com/package/concurrently) if they want to [run diagnostics](https://docs.astro.build/en/reference/cli-reference/#astro-check) during development (`astro check --watch & astro dev`). For more info, see [this issue](https://github.com/satnaing/astro-paper/issues/113).
-
-## ✨ Feedback & Suggestions
-
-If you have any suggestions/feedback, you can contact me via [my email](mailto:contact@satnaing.dev). Alternatively, feel free to open an issue if you find bugs or want to request new features.
-
-## 📜 License
-
-Licensed under the MIT License, Copyright © 2025
-
+```markdown
+---
+title: The title of the post
+description: One-line summary, used for SEO and the post list.
+pubDatetime: 2026-01-15T09:00:00Z
+tags:
+  - astro
+  - notes
+featured: false
+draft: false
 ---
 
-Made with 🤍 by [Sat Naing](https://satnaing.dev) 👨🏻‍💻 and [contributors](https://github.com/satnaing/astro-paper/graphs/contributors).
+Post body goes here.
+```
+
+- **Required**: `title`, `description`, `pubDatetime`.
+- **Optional**: `author` (defaults to me), `modDatetime`, `featured`, `draft`, `tags` (defaults to `["others"]`), `ogImage`, `canonicalURL`, `hideEditPost`, `timezone`.
+- The schema is enforced with Zod in `src/content.config.ts` — a mismatch fails the build.
+
+### URLs
+
+Directories become URL segments: `src/data/blog/foo/bar.md` is published at `/posts/foo/bar`, with each segment slugified.
+
+### Drafts and scheduling
+
+- `draft: true` hides a post from all listings.
+- A future `pubDatetime` hides the post in production but shows it in dev, so you can preview scheduled writing. There's a 15-minute grace window (`SITE.scheduledPostMargin`).
+- Careful: prefixing a _directory_ with `_` does **not** exclude it. Only a filename starting with `_` is skipped by the content glob. Use `draft: true` or `_filename.md`.
+
+## Layout
+
+```
+src/
+├── assets/          # icons and images
+├── components/      # Astro components
+├── data/blog/       # the posts
+├── layouts/
+├── pages/           # routes: index, about, projects, archives, tags, search, rss, og
+├── scripts/         # theme toggle
+├── styles/global.css
+├── utils/           # sorting, filtering, OG image generation
+├── config.ts        # site-wide settings
+├── constants.ts     # social links
+└── content.config.ts
+```
+
+## Customizing
+
+- **`src/config.ts`** is the main knob: domain, author, title, post-per-page counts, archive/back-button/edit-post toggles, dynamic OG images, timezone.
+- **`src/constants.ts`** holds the social and share links.
+- **Theme colors** are CSS variables in `src/styles/global.css` (`--background`, `--foreground`, `--accent`, `--muted`, `--border`) for both light and dark, re-exported to Tailwind v4 via `@theme inline`. Restyle there rather than in individual components.
+- **OG images** are generated at build time with Satori + resvg (`src/utils/og-templates/`, `src/utils/generateOgImages.ts`).
+- Imports use the `@/*` alias for `./src/*`.
+
+## Conventions
+
+- No `console.*` in committed code (ESLint `no-console: "error"`).
+- Prettier formats everything: double quotes, semicolons, 2-space indent, 80 columns. `prettier-plugin-tailwindcss` sorts class names.
+- Commit messages follow [Conventional Commits](https://conventionalcommits.org).
+
+## Deployment
+
+Pushes to `main` deploy to production on Vercel. `gyurisc.com` is canonical; `www.gyurisc.com` redirects to it.
+
+The Vercel project sets `ENABLE_EXPERIMENTAL_COREPACK=1` — **don't remove it.** Without it Vercel ignores the pinned pnpm version, falls back to pnpm 9, and the install fails on `pnpm-workspace.yaml` (which exists only to carry the pnpm 11 `allowBuilds` key that lets `sharp` run its install script).
+
+## Credits & license
+
+Theme: [AstroPaper](https://github.com/satnaing/astro-paper) by [Sat Naing](https://satnaing.dev), MIT licensed — see [LICENSE](LICENSE). Blog post content is © Krisztian Gyuris.
