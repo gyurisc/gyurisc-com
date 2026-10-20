@@ -1,4 +1,3 @@
-
 ---
 title: My old job feels very distant now
 pubDatetime: 2026-10-20T06:00:00Z
